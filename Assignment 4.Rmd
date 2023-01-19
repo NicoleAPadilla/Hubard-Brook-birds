@@ -1,0 +1,101 @@
+---
+title: "Assignment 4"
+author: "Nicole Padlla"
+date: "7/28/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
+```
+
+
+```{r}
+bird_survey<-read.csv("Valley-wide_bird_census_1999-2016.csv")
+
+```
+
+
+```{r}
+#add year column
+ bird_survey <- bird_survey %>% 
+  mutate( year = year(Date))
+ # group by species,year add count by year -full data
+bird_survey_byyear <- bird_survey %>% 
+  group_by(Species, year) %>% 
+  summarise(n = n())
+```
+
+```{r}
+#critical species based on https://www.stateofthebirds.org/2016/resources/species-assessments/
+bird_survey_critical <- bird_survey_byyear %>% 
+  filter( Species =="EVGR"|Species == "BBCU" |Species=="OSFL"|Species=="BITH"|Species=="WOTH"|Species=="CMWA"|Species =="CAWA")
+
+```
+
+
+
+
+```{r}
+cbp2 <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+new_critical_bird <- transform(bird_survey_critical, Species = factor(Species, levels = c("CAWA","WOTH","EVGR", "OSFL","BBCU","BITH","CMWA")))
+crit_birds<- ggplot(new_critical_bird,aes(x=year, y = n, group = Species, color = Species))+
+  geom_point()+
+  geom_line()+
+  scale_colour_manual(values = cbp2,labels = c("Canada Warbler","Wood Thrush","Evening Grosbeak" ,"Olive-sided Flycatcher","Black-billed Cuckoo","Bicknell's Thrush ","Cape May Warbler"))+
+labs( x="", y= "count")+
+  theme_bw()+
+  theme(legend.position = "left",legend.text = element_text (size=8), legend.title = element_text (size = 10), legend.key.size = unit(.75, "cm"),legend.key = element_rect(color = NA, fill = NA ))
+crit_birds
+ggsave("Critical birds point line.jpg", plot = crit_birds, width = 6, height = 5.5)
+
+```
+
+
+
+
+
+
+```{r}
+crit_species<- c( BBCU = "Black-billed Cuckoo", BITH ="Bicknell's Thrush ", CAWA = "Canada Warbler",CMWA ="Cape May Warbler", EVGR = "Evening Grosbeak",OSFL ="Olive-sided Flycatcher", WOTH = "Wood Thrush")
+new_critical_bird <- transform(bird_survey_critical, Species = factor(Species, levels = c("CAWA","WOTH","EVGR","OSFL","BBCU", "BITH","CMWA")))
+crit_birds_facet<- ggplot(new_critical_bird,aes(x=year, y = n, group = Species, color = Species))+
+  geom_point()+
+  geom_line()+
+  scale_colour_manual(values = cbp2,labels = c("Canada Warbler","Wood Thrush","Evening Grosbeak" ,"Olive-sided Flycatcher","Black-billed Cuckoo","Bicknell's Thrush ","Cape May Warbler"))+ 
+labs( x="", y= "")+
+  theme_bw()+
+  facet_wrap(~Species, scales = "free_y", labeller = labeller(Species = crit_species), ncol = 1) +
+  theme( legend.position = "none",strip.background = element_blank(), strip.placement = "outside",strip.text.x = element_text(size = 10))
+crit_birds_facet
+ggsave("Critical bird point facet.jpg", plot = crit_birds_facet, width = 4, height = 5.75)
+```
+
+
+```{r}
+transform(bird_survey_critical, Species = factor(Species, levels = c("CAWA","EVGR", "WOTG","BITH", "BBCU","OSFL","CMWA"))))
+```
+
+
+
+```{r}
+ggplot(bird_survey_critical, aes(x=year))+
+geom_bar()+
+  facet_wrap(~Species)
+```
+
+```{r}
+bird_survey_critical$Species
+```
+

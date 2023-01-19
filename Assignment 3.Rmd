@@ -1,0 +1,595 @@
+---
+title: "Assignment 3 - Data exploration"
+author: "Nicole Padlla"
+date: "5/23/2021"
+output: pdf_document
+---
+I forgot to read the rubric before starting the assignment. I did not keep track of individual session times. From May 17 - 24 I did about 4 hrs of exploration and from June 27 - July 6 I put in about 6 hrs of exploration. I went back and added notes from memory. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+##May 17 general exploration 1 hr
+```{r}
+bird_survey<-read.csv("Valley-wide_bird_census_1999-2016.csv")
+
+```
+
+
+```{r}
+summary(bird_survey)
+```
+
+
+
+```{r}
+#count species full data. There are a few birds with high count, over 20,000. Many more birds with less than 10,000 from 1989-2016 
+ ggplot(bird_survey,(aes(Species)))+
+geom_bar()+
+  theme(axis.text.x=element_text(color = "black", size= 8, angle = 70, vjust=.8, hjust=.8))
+
+```
+
+
+
+```{r}
+#general exploration by different measurements taken
+#sighting by sky cover. More sightings with less sky cover, seems expected. Better weather easier to detect, seasonal migrants in spring/summer when survay took place, breeding more calls
+ggplot(bird_survey,(aes(Species)))+
+geom_bar()+
+  facet_wrap(~Sky)
+```
+
+
+```{r}
+#sightings by sex, more males than females to be expected. Males are more colorful.
+ggplot(bird_survey,(aes(Species)))+
+geom_bar()+
+  facet_wrap(~ Sex)
+```
+
+
+
+```{r}
+#sighting by observer, don't see a pattern
+ggplot(bird_survey,(aes(Species)))+
+geom_bar()+
+  facet_wrap(~ Observer)
+```
+
+
+#detection plot
+```{r}
+# Song, Call, Visual, Other defined in documentation. More likely reason why more males are counted than females. Most counts done by Song or Call. Wow, that's difficult.
+detect <- ggplot(bird_survey,aes( x = Detection.Method))+
+geom_bar()+
+  labs(title = "Detection Method", x= "note: D, F and VC undefined in documentation" )+
+    theme(axis.title.x = element_text(size = 6, hjust = 1), axis.text.x = element_text(size = 8), plot.title = element_text(size = 10))+
+            scale_x_discrete(labels = c("" ,"Call","D","F", "Other","Song","Visual","VC")) 
+ 
+  
+detect
+ggsave("Detection Method.jpg", plot = detect, height = 3, width =3.5)
+```
+
+
+
+
+```{r}
+#which plots are birds detected on. There are 400 plots. Not sure about discerning a pattern form the plots. 
+ggplot(bird_survey,aes( x = Plot))+
+geom_bar()
+
+```
+
+
+
+
+##May 22 - challenge getting data into form to show change over time. Looked at online resources and re-read R4ds. 1 hr
+```{r}
+#I'd like to see change over time, found lubridate in online article to add year column
+#add year column
+library(lubridate)
+ bird_survey <- bird_survey %>% 
+  mutate( year = year(Date))
+View(bird_survey)
+```
+
+
+
+##May24 went to office hours and Charlotte showed me how to tranform data. 30 min
+```{r}
+# group by species, year, count by year -full data, got help from Charlotte to do this
+bird_survey_byyear <- bird_survey %>% 
+  group_by(Species, year) %>% 
+  summarise(n = n())
+
+#plot change over time - full data
+p<-ggplot(bird_survey_byyear)+
+  geom_line( aes(x = year, y= n, group= Species))+
+  labs(title = "Hubbard Brook Experimental Forrest bird survey", caption = "Data from https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-hbr&identifier=178", x ="year", y="count")+
+  theme_bw()
+p
+ggsave("Hubbard Brook Change over time.jpg", plot = p, height = 3, width = 5.5)
+```
+
+```{r}
+#simpify data, though about exploring bids with lower counts
+bird_small <- bird_survey_byyear%>% 
+  filter(n< 10000)
+```
+
+
+
+```{r}
+summary(bird_small)
+```
+
+```{r}
+#this is not what I intended. Maybe it's not good to simplify by an arbitrary number. Could miss some important info.
+ggplot(bird_small, aes(Species))+
+  geom_bar()
+```
+
+
+
+##June 25 exploring why there are so few bird counts before 1999. 1hr. Had to re-read how to use filter.
+```{r}
+#What happened before 1999?,filter year <= 1999, 
+bird_survey_1999 <- bird_survey %>% 
+  filter(year <= 1999)
+bird_survey_byyear_1999<- bird_survey_byyear %>% 
+  filter(year <=1999)
+```
+
+
+
+
+
+
+```{r}
+#plot change over time, counting error? Looking closer at time frame in question to find reason for few counts.
+ggplot(bird_survey_byyear_1999)+
+  geom_line( aes(x = year, y= n, group= Species, color = Species))
+    
+```
+
+
+```{r}
+#what's up before 1999, counts? General exploration.
+
+ggplot(bird_survey_1999, aes(Species)) +
+geom_bar()
+ 
+
+```
+
+
+```{r}
+#before 1999, counts by year?
+
+ggplot(bird_survey_1999, aes(Species)) +
+  geom_bar()+
+  facet_wrap(~year)
+```
+
+
+##June 26 - I wondered about what role the observer plays
+```{r}
+#Maybe the observers play a role in lack of counts before 1999
+ggplot(bird_survey_1999, aes(Species)) +
+  geom_bar()+
+  facet_wrap(~Observer)
+```
+ 
+##June 26 continue <1999 exploration 1 hr
+```{r}
+# In 1989 there was one observer. ANd then ten years later there 8 observers. Why include the the 1989 data? Are these volunteers, did they get more funding? Is that why there are more observers? Need to check website and data documents. Folks working at the Hubbard forest are grad students, faculty at universities and Forest Service staff.
+observers <- ggplot(bird_survey_1999, aes(Observer)) +
+  geom_bar()+
+  facet_wrap(~year)+
+  labs(title = "Bird observers at Hubbard Brook Experimental Forest", y = "count", x="") +
+  theme_bw()
+
+ 
+observers
+ggsave("Observers 1989-1999.jpg", plot=observers, height=2.5, width=5)
+```
+
+
+
+```{r}
+#seeing if different combos of faceting revealing anything interesting. Too difficult to see. Need to change graph.
+ggplot(bird_survey_1999, aes(Observer)) +
+  geom_bar()+
+  facet_wrap(~Species)
+```
+
+
+
+```{r}
+# from 1989 to 2016 there are 74 observers. In 1989 there is one observer, then in 1999 there are 7 observers
+obs<- table(bird_survey$Observer)
+dim(obs)
+```
+
+
+
+```{r}
+#how many observers in each year? Over the years looks like there are about 5 to 10 observers per year.
+ggplot(bird_survey, aes(x=Observer))+
+  geom_bar()+
+  facet_wrap(~year)
+```
+
+##June 28 
+```{r}
+#I wanted to know about critical species from this survey. Critical species based on https://www.stateofthebirds.org/2016/resources/species-assessments/. Took about 45 minutes to cross reference my birds to critical list. One list is alphabetized by common name, th other is alphabetized by latin name.
+critical_bird <- bird_survey %>% 
+    filter( Species =="EVGR"|Species == "BBCU" |Species=="OSFL"|Species=="BITH"|Species=="WOTH"|Species=="CMWA"|Species =="CAWA")
+
+ 
+critical_bird_byyear <- bird_survey_byyear %>% 
+  filter( Species =="EVGR"|Species == "BBCU" |Species=="OSFL"|Species=="BITH"|Species=="WOTH"|Species=="CMWA"|Species =="CAWA")
+ 
+
+```
+
+
+```{r}
+#change over time. My assumption is that numbers will decline over time. EVGR steep decline from 1999 to 2000, then level off then a little increase in 2011, still very low compared to 1999.Canada Warbler had a steep decline after 1999 and then bounced up and down with overall increasing trend. The other bird numbers stayed flat and low. The wood thrush and flycatcher had a small bump in 2015 and 2014.
+# The palette with black:
+cbp2 <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+crit_birds<- ggplot(critical_bird_byyear)+
+  geom_line(aes(x=year, y = n, group = Species, color = Species))+
+  scale_colour_manual(values = cbp2,labels = c("Black_billed Cuckoo", "Bicknell's Thrush ", "Canada Warbler","Cape May Warbler", "Evening Grosbeak","Olive-sided Flycatcher", "Wood Thrush"))+
+labs(title = "Critical bird species", x="year", y= "count")+
+  theme_bw()
+crit_birds
+ggsave("Critical birds .jpg", plot= crit_birds, height = 3, width = 5.5)
+```
+
+
+
+```{r}
+crit_birds<- ggplot(critical_bird_byyear)+
+  geom_line(aes(x=year, y = n, group = Species, color = Species))+
+  scale_colour_manual(values = cbp2,labels = c("Black_billed Cuckoo", "Bicknell's Thrush ", "Canada Warbler","Cape May Warbler", "Evening Grosbeak","Olive-sided Flycatcher", "Wood Thrush"))+
+labs(title = "Critical bird species", x="year", y= "count")+
+  theme_bw()+
+  facet_wrap(~Species, scales = "free_y")
+crit_birds
+```
+
+##June 29 incorporated animation assignement
+```{r}
+# color blind pallettes, I found online. The palette with grey:
+cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+# The palette with black:
+cbp2 <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```
+
+
+
+```{r}
+#critical birds, change over time animation
+# The palette with black:
+cbp2 <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+library(ggplot2)
+library(gganimate)
+ggplot(critical_bird_byyear,aes(x=year, y = n, group = Species, color = Species))+
+  geom_line()+
+  scale_colour_manual(values = cbp2,labels = c("Black_billed Cuckoo", "Bicknell's Thrush ", "Canada Warbler","Cape May Warbler", "Evening Grosbeak","Olive-sided Flycatcher", "Wood Thrush"))+
+  labs(title = "Critical bird species", caption = "Data from https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-hbr&identifier=178", x ="", y = "count")+
+  theme_bw()+
+  transition_reveal(year)
+```
+
+##June 30 
+```{r}
+#explore critical birds by different measurements
+ggplot(critical_bird,aes(x = Species))+
+  geom_bar()+
+  facet_wrap(~year)
+```
+
+
+```{r}
+#try combos of faceting to see if anything interesting is revealed
+ggplot(critical_bird,aes(x = year))+
+  geom_bar()+
+  facet_wrap(~Species)
+```
+
+
+```{r}
+grosbeak <- critical_bird %>% 
+  filter(year == 1999, Species =="EVGR")
+dim(grosbeak)
+
+grosbeak2 <- critical_bird %>% 
+  filter(year ==2001, Species =="EVGR")
+dim(grosbeak2)
+```
+
+
+
+```{r}
+#Observer and Species
+ggplot(critical_bird,aes(x = Species))+
+  geom_bar()+
+  facet_wrap(~Observer)
+```
+
+
+
+```{r}
+#observer and year
+ggplot(critical_bird,aes(x = Observer))+
+  geom_bar()+
+  facet_wrap(~year)
+```
+
+```{r}
+ggplot(critical_bird,aes(x = year))+
+  geom_bar()+
+  facet_wrap(~Observer)
+```
+
+
+
+```{r}
+ggplot(critical_bird,aes(x = Observer))+
+  geom_bar()+
+  facet_wrap(~Species)
+```
+
+
+##July 2
+```{r}
+# Are there differences among types of birds?  Made 4 subgroups: songbird, raptors and waterbirds(it's a loose grouping,includes Heron and Kingfisher) and woodpeckers. Split into subgroups without count by year. Would expect songbird numbers to be lower over time. Not sure about raptors, waterbirds and woodpeckers.
+song_bird <- bird_survey %>% 
+  filter(Species !="GBHE"| Species !="CAGO"| Species !="MALL"| Species !="COME"|Species != "BEKI"|Species != "OSPR"|Species !="RTHA"|Species !="BWHA"|Species !="SSHA"|Species != "COHA"| Species !="HOGO"| Species !="AMKE" |Species !="NSWO"|Species != "BDOW"|Species !="DOWO"|Species !="HAWO"|Species !="YSFL"|Species !="PIWO"|Species!="YBSA")
+
+raptor <- bird_survey %>% 
+  filter(Species == "OSPR"|Species =="RTHA"|Species =="BWHA"|Species =="SSHA"|Species == "COHA"| Species =="HOGO"| Species =="AMKE" |Species =="NSWO"|Species == "BDOW")
+
+waterbird <- bird_survey %>% 
+  filter(Species == "CAGO"|Species =="MALL"|Species =="COME"|Species =="GBHE"|Species =="BEKI")
+woodpeckers<- bird_survey %>% 
+  filter(Species == "DOWO"|Species =="YBSA"|Species =="HAWO"|Species =="YSFL"|Species =="PIWO")
+```
+
+
+
+#July 3 - Use bird codes to divide data into subgroups counts by year
+```{r}
+# subgroups count by year 
+song_bird_byyear <- bird_survey_byyear %>% 
+  filter(Species !="GBHE"| Species !="CAGO"| Species !="MALL"| Species !="COME"|Species != "BEKI"|Species != "OSPR"|Species !="RTHA"|Species !="BWHA"|Species !="SSHA"|Species != "COHA"| Species !="HOGO"| Species !="AMKE" |Species !="NSWO"|Species != "BDOW"|Species !="DOWO"|Species !="HAWO"|Species !="YSFL"|Species !="PIWO"|Species!="YBSA")
+
+raptor_byyear <- bird_survey_byyear %>% 
+  filter(Species == "OSPR"|Species =="RTHA"|Species =="BWHA"|Species =="SSHA"|Species == "COHA"| Species =="HOGO"| Species =="AMKE" |Species =="NSWO"|Species == "BDOW")
+
+waterbird_byyear <- bird_survey_byyear %>% 
+  filter(Species == "CAGO"|Species =="MALL"|Species =="COME"|Species =="GBHE"|Species =="BEKI")
+woodpeckers_byyear<- bird_survey_byyear %>% 
+  filter(Species == "DOWO"|Species =="YBSA"|Species =="HAWO"|Species =="YSFL"|Species =="PIWO")
+```
+
+
+```{r}
+#Average by year of the subgroups, to compare averages overtime. May not be that useful
+avg_songbird <- song_bird_byyear %>% 
+  group_by(year) %>% summarise(mean = mean(n))
+avg_raptor<-raptor_byyear%>% 
+  group_by(year) %>% summarise(mean = mean(n))
+avg_waterbird <- waterbird_byyear%>% 
+  group_by(year) %>% summarise(mean = mean(n))
+avg_woodpeckers<- woodpeckers_byyear %>% 
+  group_by(year) %>% summarise(mean = mean(n))
+```
+
+
+```{r}
+#change over time songbirds
+songbird_plot <-ggplot(song_bird_byyear, aes(x=year, y = n, group =Species))+
+  geom_line()+
+  labs(title = "Songbirds", y = "count", x ="year")+
+  theme(plot.title = element_text(size = 10))
+
+songbird_plot
+  ggsave("song bird counts .jpg", plot = songbird_plot, height = 2, width = 3)
+```
+
+
+```{r}
+#change over time raptor
+raptor_plot <-ggplot(raptor_byyear, aes(x=year, y = n, group_by(Species), color = Species))+
+  geom_line() +
+  labs(title = "Raptors", y = "count", x ="year")+
+scale_colour_manual(values = cbp2,labels = c("American kestrel", "Barred Owl", "Broad_winged Hawk", "Northern Saw-whet Owl","Red-tailed Hawk","Sharp-shinned Hawk"))+
+theme(plot.title = element_text(size = 10),legend.text = element_text(size=6), legend.title = element_text(size=7), legend.key.size = unit(.5, 'cm'))+
+  theme_bw()
+raptor_plot
+  ggsave("raptors.jpg", plot = raptor_plot, height = 2, width = 3.5)
+```
+
+
+```{r}
+raptor_nolegend <-ggplot(raptor_byyear, aes(x=year, y = n, group_by(Species), color = Species))+
+  geom_line() +
+  labs(title = "Raptors", y = "count", x ="year")+
+scale_colour_manual(values = cbp2)+
+theme(plot.title = element_text(size = 10),legend.position = "none")
+
+  
+raptor_nolegend
+ggsave("raptors_nolegend.jpg", plot = raptor_nolegend, height = 2, width = 2)
+```
+
+
+```{r}
+ggplot(raptor, aes(x=Species))+
+  geom_bar()+
+  facet_wrap(~Detection.Method)
+```
+
+
+```{r}
+#change over time waterbird
+waterbird_plot <- ggplot(waterbird_byyear, aes(x=year, y = n, group_by(Species), color = Species))+
+  geom_line()+
+  labs(title = "Waterbirds", y = "count", x ="year")+
+  scale_colour_manual(values = cbp2,labels = c("Belted Kingfisher","Canada Goose","Common Merganser","Great Blue Heron","Mallard"))+  theme(plot.title = element_text(size = 10),legend.text = element_text(size=6), legend.title = element_text(size=7), legend.key.size = unit(.5, 'cm'))+
+  theme_bw()
+waterbird_plot
+wb_nolegend <- ggplot(waterbird_byyear, aes(x=year, y = n, group_by(Species), color = Species))+
+  geom_line()+
+  labs(title = "Waterbirds", y = "count", x ="year")+
+  scale_colour_manual(values = cbp2,labels = c("Belted Kingfisher","Canada Goose","Common Merganser","Great Blue Heron","Mallard"))+  theme(plot.title = element_text(size = 10), legend.position = "none")
+ 
+
+  ggsave("waterbird no legend.jpg", plot = wb_nolegend, height = 2, width = 2)
+```
+
+```{r}
+ggplot(waterbird, aes(x=Species))+
+   geom_bar()+
+  facet_wrap(~Detection.Method)
+```
+
+#July 4 9:00 am -10:30
+```{r}
+#what's up with the heron, mallard and merganser? Very common birds. Looking at a map, Hubbard forest does not have much standing water. Could explain the lack of sightings.
+w_bird <-bird_survey %>% 
+  filter( Species =="GBHE"|Species=="COME"|Species =="MALL")
+ggplot(w_bird,aes(x=Species))+
+         geom_bar()
+ggplot(w_bird,aes(x=Species))+
+         geom_bar()+
+  facet_wrap(~year)
+ggplot(w_bird,aes(x=Species))+
+         geom_bar()+
+  facet_wrap(~Detection.Method)
+#only detected call
+```
+
+
+
+#July 4 added woodpeckers subgroup
+```{r}
+#change over time wood peckers
+woodpecker_plot <-ggplot(woodpeckers_byyear, aes(x=year, y = n, group_by(Species), color = Species))+
+  geom_line()+
+labs(title = "Woodpeckers", y = "count", x ="year")+
+  scale_colour_manual(values = cbp2,labels = c("Downy Woodpecker","Hairy Woodpecker","Pileated Woodpecker","Yellow-bellied Sapsucker", "Yellow Shafted Flicker"))+ 
+  theme(plot.title = element_text(size = 10),legend.text = element_text(size=6), legend.title = element_text(size=7), legend.key.size = unit(.5, 'cm'))+
+    theme_bw()
+
+ggsave("woodpeckers.jpg", plot = woodpecker_plot, height = 2, width = 3.5)
+  
+woodpecker_plot
+
+wp_nolegend<- ggplot(woodpeckers_byyear, aes(x=year, y = n, group_by(Species), color = Species))+
+  geom_line()+
+labs(title = "Woodpeckers", y = "count", x ="year")+
+  scale_colour_manual(values = cbp2,labels = c("Downy Woodpecker","Hairy Woodpecker","Pileated Woodpecker","Yellow-bellied Sapsucker", "Yellow Shafted Flicker"))+ 
+  theme(plot.title = element_text(size = 10),legend.position = "none")
+
+ggsave("wp no legend .jpg", plot = wp_nolegend, height = 2, width = 2)
+#interesting, flickers are super common but numbers are low in this survey
+```
+
+```{r}
+ggplot(woodpeckers, aes(x=Species))+
+   geom_bar()+
+  facet_wrap(~Detection.Method)
+```
+
+
+```{r}
+#curious about low flicker numbers
+flicker<- bird_survey %>% 
+  filter(Species =="YSFL")
+ggplot(flicker, aes(x=Species))+
+  geom_bar()+
+  facet_wrap(~year)
+ggplot(flicker, aes(x=Species))+
+  geom_bar()+
+  facet_wrap(~Observer)
+ggplot(flicker, aes(x=Observer))+
+  geom_bar()
+ggplot(flicker, aes(x=Distance))+
+  geom_bar()
+ggplot(flicker, aes(x=Detection.Method))+
+  geom_bar()
+ggplot(flicker, aes(x=Observer))+
+  geom_bar()+
+  facet_wrap(~year)
+```
+
+#July 5
+```{r}
+#compare average change overtime of subgroups. I though it would be interesting to have one plot with changes of all groups overtime in order to make comparisons. I tried doing it with counts and realized that would be messy. So I decided to try averages. Still not sure how to plot averages on one plot. Looked through multiple resources online, thought I remembered a something about that in class but need to find the reference.
+#July 6 add facet by observer to subgroups
+p1 <-ggplot(avg_songbird, aes(x=year, y = mean))+
+  geom_line()+
+  labs(title = "Average song bird")
+p2 <-ggplot(avg_raptor,aes(x=year, y = mean))+
+  geom_line()+
+  labs(title = "Average raptor")
+p3<- ggplot(avg_waterbird,aes(x=year, y = mean))+
+  geom_line()+
+  labs(title = "Average water bird")
+p4<-ggplot(avg_woodpeckers,aes(x=year, y = mean))+
+  geom_line()+
+  labs(title = "Average woodpecker")
+```
+
+
+
+```{r}
+#the averages and counts are so different. 
+library(patchwork)
+p1+p2+p3+p4
+```
+
+```{r}
+#interesting that the low numbers for raptors, waterbirds and woodpeckers don't correlate with species of concern. 
+ggplot(song_bird, aes(x=Species))+
+  geom_bar()
+ggplot(raptor, aes(x=Species))+
+  geom_bar()
+ggplot(waterbird, aes(x=Species))+
+  geom_bar()
+ggplot(woodpeckers, aes(x=Species))+
+  geom_bar()
+```
+
+
+```{r}
+three_plots <- wp_nolegend+raptor_nolegend+wb_nolegend
+ggsave("plot w.o. song birds.jpg", plot = three_plots, width = 7, height = 3)
+three_plots
+```
+
+
+```{r}
+detection_plot <- (detect +songbird_plot)/
+  (wp_nolegend+raptor_nolegend+wb_nolegend)
+detection_plot
+ggsave("Detection method.jpg", plot = detection_plot, width = 7, height = 5)
+```
+
+

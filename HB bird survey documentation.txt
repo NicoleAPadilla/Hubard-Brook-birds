@@ -1,0 +1,1080 @@
+
+  
+    
+      uid=person_name,o=EDI,dc=ecoinformatics,dc=org
+      all
+    
+    
+      public
+      read
+    
+  
+  
+    knb-lter-hbr.178
+    doi:10.6073/pasta/faca2b2cf2db9d415c39b695cc7fc217
+    Valleywide Bird Survey
+    Valleywide Bird Survey, Hubbard Brook Experimental Forest, 1999-2016 (ongoing)
+    
+      Nicholas L Rodenhouse
+      nrodenho@wellesley.edu
+      https://orcid.org/0000-0002-1291-1499
+    
+    
+      Scott Sillett
+      silletts@si.edu
+      https://orcid.org/0000-0002-7486-0076
+    
+    2019-04-17
+    English
+    
+      
+  This data set includes bird point-count data collected during the
+  breeding seasons (May-July) of 1999-2016 at 373 locations throughout
+  Hubbard Brook Experimental Forest.
+
+      
+  These data were gathered as part of the Hubbard Brook Ecosystem Study
+  (HBES). The HBES is a collaborative effort at the Hubbard Brook
+  Experimental Forest, which is operated and maintained by the USDA
+  Forest Service, Northern Research Station.
+
+    
+    
+      HBEF Bird Area
+      HBR
+      Hubbard Brook LTER
+      Hubbard Brook Ecosystem Study
+    
+    
+      animals
+      birds
+      census
+      ecosystems
+      elevation
+      forests
+      LTER Network Controlled Vocabulary
+    
+    
+      populations
+      LTER Network Core Research Areas
+    
+    
+      
+  This information is released under the Creative Commons license -
+  Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/).
+  The consumer of these data ("Data User" herein) is required
+  to cite it appropriately in any publication that results from its use.
+  The Data User should realize that these data may be actively used by
+  others for ongoing research and that coordination may be necessary to
+  prevent duplicate publication. The Data User is urged to contact the
+  authors of these data if any questions about methodology or results
+  occur. Where appropriate, the Data User is encouraged to consider
+  collaboration or co-authorship with the authors. The Data User should
+  realize that misinterpretation of data may occur if used out of
+  context of the original study.
+
+      
+  While substantial efforts are made to ensure the accuracy of data and
+  associated documentation, complete accuracy of data sets cannot be
+  guaranteed. All data are made available "as is." The Data
+  User should be aware, however, that data are updated periodically and
+  it is the responsibility of the Data User to check for new versions of
+  the data. The data authors and the repository where these data were
+  obtained shall not be liable for damages resulting from any use or
+  misinterpretation of the data. Thank you.
+
+    
+    
+      
+        Hubbard Brook Experimental Forest
+        
+          -71.8062
+          -71.7022
+          43.959
+          43.914
+        
+      
+      
+        
+          
+            1999-06-07
+          
+          
+            2016-06-16
+          
+        
+      
+    
+    
+      Hubbard Brook Ecosystem Study
+      Information Manager
+      			234 Mirror Lake Road
+			North Woodstock, NH 03262  United States
+      hbr-im@lternet.edu
+      https://hubbardbrook.org
+    
+    
+      Hubbard Brook Ecosystem Study
+      			234 Mirror Lake Road
+			North Woodstock, NH 03262  United States
+    
+    
+      
+        
+          
+  LOCATION DESCRIPTION
+
+          
+  The Hubbard Brook Valley bird area has been used extensively for
+  studies of bird populations since the 1970s. The area is forested by
+  typical northern hardwood species (sugar maple, beech and yellow
+  birch) over about 85% of its area, and by patches of red spruce and
+  balsam fir over the remaining 15%.
+
+          
+  SAMPLING DESIGN
+
+          
+  Each transect point was surveyed three times per year. The starting
+  point and path among points differed for each of the three replicates
+  to minimize the effects of visitation path on time of surveying. First
+  round: valley bottom to ridge. Second round: Ridge to valley bottom.
+  Third Round: mix of valley bottom to ridge and vice-versa. The survey
+  began at 05:30 and was completed before 10:00. A 10 minute survey was
+  conducted at each station, commencing 1 minute after arrival at a
+  point. Surveys were conducted under satisfactory weather conditions:
+  good visibility, little or no precipitation, light winds.
+
+          
+  Birds were recorded at two distances: within 50 meters and at 50 – 100
+  meters. The species of all birds seen and heard were recorded as well
+  as all individual squirrels and chipmunks seen and heard. The
+  10-minute count was divided into 3 equal intervals (3 minutes, 20
+  seconds). Periods were numbered as: 1=0–3:20 min, 2=3:21–6:40 min,
+  3=6:41–10:00min. Each period was treated as a separate count (i.e.,
+  Individuals in the later periods were counted even if they were
+  detected in period 1).
+
+          
+  New.Record indicates a detection is new for the complete 10-minute
+  count; for example if an individual is detected in the second period
+  and was also detected in the first it received a 0. If it appears for
+  the first time in the second period, it receives a 1. If an individual
+  moves from the outer distance circle (50-100 m) to the 50 m circle
+  during the count, this individual should be marked with a 1 in the
+  New.Record column.
+
+          
+  If two male birds were detected simultaneously within 100 m at a
+  count, both individuals received a 1 in the Counter.sing column. These
+  data are critical in that they allow comparison with the point count
+  method prior to 2006.
+
+        
+      
+    
+    
+      Hubbard Brook Valleywide Bird Survey
+      
+        Nicholas Rodenhouse
+        principalInvestigator
+      
+      
+        Scott Sillett
+        principalInvestigator
+      
+      
+        These data were funded wholly, or in part, by NSF LTREB, NSF LTER #9810221, #0423259,  #1114804, with additional funding from the Smithsonian Institution and Wellesley College.
+      
+    
+    
+      Valleywide_bird_census
+      Valleywide bird census
+      
+        Valley-wide_bird_census_1999-2016.csv
+        14317061
+        74f8d5787d865b32069656306213ed39
+        
+          
+            1
+            \r\n
+            column
+            
+              ,
+              "
+            
+          
+        
+        
+          
+            https://pasta.lternet.edu/package/data/eml/knb-lter-hbr/178/3/eecb146279aa290af2292d75d3ba0f8b
+          
+        
+      
+      
+        
+          Plot
+          Plot
+          Plot number
+          string
+          
+            
+              
+                
+                  any text
+                
+              
+            
+          
+        
+        
+          Replicate
+          Replicate
+          Survey number within a season. Values range from 0-4. 
+          string
+          
+            
+              
+                
+                  any text
+                
+              
+            
+          
+        
+        
+          Date
+          Date
+          Sample collection date 
+          date
+          
+            
+              YYYY-MM-DD
+            
+          
+        
+        
+          Time
+          Time
+          Time count was started 
+          date
+          
+            
+              hh:mm
+            
+          
+        
+        
+          Observer
+          Observer
+          Initials of observer 
+          string
+          
+            
+              
+                
+                  any text
+                
+              
+            
+          
+        
+        
+          Sky
+          Sky
+          Rating system for sky conditions at the start of the count. 
+          string
+          
+            
+              
+                
+                  
+                    0
+                    clear of few clouds
+                  
+                  
+                    1
+                    partly cloudy (scattered) or variable sky
+                  
+                  
+                    2
+                    cloudy (broken) or overcast
+                  
+                  
+                    3
+                    rain
+                  
+                  
+                    4
+                    fog
+                  
+                  
+                    6
+                    snow
+                  
+                  
+                    7
+                    showers
+                  
+                  
+                    5
+                    drizzle
+                  
+                
+              
+            
+          
+        
+        
+          Wind
+          Wind
+          Rating system for wind conditions at the start of the count. 
+          string
+          
+            
+              
+                
+                  
+                    0
+                    Calm. Less than 1 mph. Smoke rises vertically.
+                  
+                  
+                    1
+                    Light air. 1 to 3 mph. Smoke drifts with air, weather vanes inactive.
+                  
+                  
+                    2
+                    Light breeze. 4 to 7 mph. Weather vanes active, wind felt on face, leaves rustle.
+                  
+                  
+                    3
+                    Gentle breeze. 8 to 12 mph. Leaves and small twigs move, light flags extend.
+                  
+                  
+                    4
+                    Moderate breeze. 13 to 18 mph. Small branches sway, dust and loose paper blows about.
+                  
+                  
+                    5
+                    Fresh breeze. 19 to 24 mph. Small trees sway, waves break on inland waters.
+                  
+                  
+                    6
+                    Strong breeze. 25 to 31 mph. Large branches sway, umbrellas difficult to use.
+                  
+                
+              
+            
+          
+        
+        
+          Bird.Number
+          Bird.Number
+          The individual bird number within the count 
+          string
+          
+            
+              
+                
+                  any text
+                
+              
+            
+          
+        
+        
+          Period
+          Period
+          First, second or third interval (3 minutes 20 seconds) of the 10 minute survey at each station 
+          string
+          
+            
+              
+                
+                  
+                    1
+                    0–3:20 minutes
+                  
+                  
+                    2
+                    3:21–6:40 minutes
+                  
+                  
+                    3
+                    6:41–10:00 minutes
+                  
+                
+              
+            
+          
+        
+        
+          Minute
+          Minute
+          Minute within the count that an individual was detected 
+          string
+          
+            
+              
+                
+                  any text
+                
+              
+            
+          
+        
+        
+          Species
+          Species
+          Four letter abbreviation for each species found at Hubbard Brook 
+          string
+          
+            
+              
+                
+                  
+                    COLO
+                    Common Loon
+                  
+                  
+                    GBHE
+                    Great Blue Heron
+                  
+                  
+                    CAGO
+                    Canada Goose
+                  
+                  
+                    MALL
+                    Mallard
+                  
+                  
+                    RNDU
+                    Ring-necked Duck
+                  
+                  
+                    COME
+                    Common Merganser
+                  
+                  
+                    TUVU
+                    Turkey Vulture
+                  
+                  
+                    OSPR
+                    Osprey
+                  
+                  
+                    RTHA
+                    Red-tailed Hawk
+                  
+                  
+                    BWHA
+                    Broad-winged Hawk
+                  
+                  
+                    SSHA
+                    Sharp-shinned Hawk
+                  
+                  
+                    COHA
+                    Cooper's Hawk
+                  
+                  
+                    HOGO
+                    Northern Goshawk
+                  
+                  
+                    AMKE
+                    American Kestrel
+                  
+                  
+                    RUGR
+                    Ruffed Grouse
+                  
+                  
+                    WITU
+                    Wild Turkey
+                  
+                  
+                    AMWO
+                    American Woodcock
+                  
+                  
+                    MODO
+                    Mourning Dove
+                  
+                  
+                    RODO
+                    Rock Dove
+                  
+                  
+                    BBCU
+                    Black-billed Cuckoo
+                  
+                  
+                    YBCU
+                    Yellow-billed Cuckoo
+                  
+                  
+                    BDOW
+                    Barred Owl
+                  
+                  
+                    NSWO
+                    Saw-whet Owl
+                  
+                  
+                    CONI
+                    Common Nighthawk
+                  
+                  
+                    CHSW
+                    Chimney Swift
+                  
+                  
+                    RTHU
+                    Ruby-throated Hummingbird
+                  
+                  
+                    BEKI
+                    Belted Kingfisher
+                  
+                  
+                    YBSA
+                    Yellow-bellied Sapsucker
+                  
+                  
+                    DOWO
+                    Downy Woodpecker
+                  
+                  
+                    HAWO
+                    Hairy Woodpecker
+                  
+                  
+                    YSFL
+                    Northern Flicker
+                  
+                  
+                    PIWO
+                    Pileated Woodpecker
+                  
+                  
+                    OSFL
+                    Olive-sided Flycatcher
+                  
+                  
+                    EAWP
+                    Eastern Wood Pewee
+                  
+                  
+                    YBFL
+                    Yellow-bellied Flycatcher
+                  
+                  
+                    ACFL
+                    Acadian Flycatcher
+                  
+                  
+                    ALFL
+                    Alder Flycatcher
+                  
+                  
+                    LEFL
+                    Least Flycatcher
+                  
+                  
+                    EAPH
+                    Eastern Phoebe
+                  
+                  
+                    GCFL
+                    Great Crested Flycatcher
+                  
+                  
+                    EAKI
+                    Eastern Kingbird
+                  
+                  
+                    PUMA
+                    Purple Martin
+                  
+                  
+                    TRES
+                    Tree Swallow
+                  
+                  
+                    BANS
+                    Bank Swallow
+                  
+                  
+                    BARS
+                    Barn Swallow
+                  
+                  
+                    BLJA
+                    Blue Jay
+                  
+                  
+                    AMCR
+                    American Crow
+                  
+                  
+                    CORA
+                    Common Raven
+                  
+                  
+                    BCCH
+                    Black-capped Chickadee
+                  
+                  
+                    BOCH
+                    Boreal Chickadee
+                  
+                  
+                    WBNH
+                    White-breasted Nuthatch
+                  
+                  
+                    RBNH
+                    Red-breasted Nuthatch
+                  
+                  
+                    BRCR
+                    Brown Creeper
+                  
+                  
+                    HOWR
+                    House Wren
+                  
+                  
+                    WIWR
+                    Winter Wren
+                  
+                  
+                    GCKI
+                    Golden-crowned Kinglet
+                  
+                  
+                    RCKI
+                    Ruby-crowned Kinglet
+                  
+                  
+                    EABL
+                    Eastern Bluebird
+                  
+                  
+                    VEER
+                    Veery
+                  
+                  
+                    BITH
+                    Bicknell's Thrush
+                  
+                  
+                    SWTH
+                    Swainson's Thrush
+                  
+                  
+                    HETH
+                    Hermit Thrush
+                  
+                  
+                    WOTH
+                    Wood Thrush
+                  
+                  
+                    AMRO
+                    American Robin
+                  
+                  
+                    GRCA
+                    Gray Catbird
+                  
+                  
+                    CEDW
+                    Cedar Waxwing
+                  
+                  
+                    BOWA
+                    Bohemian Waxwing
+                  
+                  
+                    EUST
+                    European Starling
+                  
+                  
+                    BHVI
+                    Blue-headed Vireo
+                  
+                  
+                    YTVI
+                    Yellow-throated Vireo
+                  
+                  
+                    WAVI
+                    Warbling Vireo
+                  
+                  
+                    PHVI
+                    Philadelphia Vireo
+                  
+                  
+                    REVI
+                    Red-eyed Vireo
+                  
+                  
+                    TEWA
+                    Tennessee Warbler
+                  
+                  
+                    NAWA
+                    Nashville Warbler
+                  
+                  
+                    NOPA
+                    Northern Parula
+                  
+                  
+                    CSWA
+                    Chestnut-sided Warbler
+                  
+                  
+                    MAWA
+                    Magnolia Warbler
+                  
+                  
+                    CMWA
+                    Cape May Warbler
+                  
+                  
+                    BTBW
+                    Black-throat. Blue Warbler
+                  
+                  
+                    MYWA
+                    Yellow-rumped Warbler
+                  
+                  
+                    BTNW
+                    Black-throated Green Warbler
+                  
+                  
+                    BLBW
+                    Blackburnian Warbler
+                  
+                  
+                    BBWA
+                    Bay-breasted Warbler
+                  
+                  
+                    BLPW
+                    Blackpoll Warbler
+                  
+                  
+                    BAWW
+                    Black-and-White Warbler
+                  
+                  
+                    AMRE
+                    American Redstart
+                  
+                  
+                    OVEN
+                    Ovenbird
+                  
+                  
+                    NOWA
+                    Northern Waterthrush
+                  
+                  
+                    LOWA
+                    Louisiana Waterthrush
+                  
+                  
+                    MOWA
+                    Mourning Warbler
+                  
+                  
+                    COYE
+                    Common Yellowthroat
+                  
+                  
+                    WIWA
+                    Wilson's Warbler
+                  
+                  
+                    CAWA
+                    Canada Warbler
+                  
+                  
+                    SCTA
+                    Scarlet Tanager
+                  
+                  
+                    RBGR
+                    Rose-breasted Grosbeak
+                  
+                  
+                    INBU
+                    Indigo Bunting
+                  
+                  
+                    EATO
+                    Rufous-sided Towhee
+                  
+                  
+                    ATSP
+                    American Tree Sparrow
+                  
+                  
+                    CHSP
+                    Chipping Sparrow
+                  
+                  
+                    FISP
+                    Field Sparrow
+                  
+                  
+                    SOSP
+                    Song Sparrow
+                  
+                  
+                    LISP
+                    Lincoln's Sparrow
+                  
+                  
+                    SWSP
+                    Swamp Sparrow
+                  
+                  
+                    WTSP
+                    White-throated Sparrow
+                  
+                  
+                    WCSP
+                    White-crowned Sparrow
+                  
+                  
+                    SCJU
+                    Dark-eyed Junco
+                  
+                  
+                    SNBU
+                    Snow Bunting
+                  
+                  
+                    RWBL
+                    Red-winged Blackbird
+                  
+                  
+                    COGR
+                    Common Grackle
+                  
+                  
+                    BHCO
+                    Brown-headed Cowbird
+                  
+                  
+                    BAOR
+                    Northern Oriole
+                  
+                  
+                    PIGR
+                    Pine Grosbeak
+                  
+                  
+                    PUFI
+                    Purple Finch
+                  
+                  
+                    HOFI
+                    House Finch
+                  
+                  
+                    RECR
+                    Red Crossbill
+                  
+                  
+                    WWCR
+                    White-winged Crossbill
+                  
+                  
+                    CORE
+                    Common Redpoll
+                  
+                  
+                    PISI
+                    Pine Siskin
+                  
+                  
+                    AMGO
+                    American Goldfinch
+                  
+                  
+                    EVGR
+                    Evening Grosbeak
+                  
+                  
+                    HOSP
+                    House Sparrow
+                  
+                
+              
+            
+          
+        
+        
+          Sex
+          Sex
+          Sex, if known, of individual 
+          string
+          
+            
+              
+                
+                  
+                    F
+                    Female
+                  
+                  
+                    U
+                    Unknown
+                  
+                  
+                    M
+                    Male
+                  
+                
+              
+            
+          
+        
+        
+          Detection.Method
+          Detection.Method
+          Method by which individual was detected 
+          string
+          
+            
+              
+                
+                  
+                    S
+                    Singing
+                  
+                  
+                    C
+                    Call
+                  
+                  
+                    V
+                    Visual
+                  
+                  
+                    O
+                    Other
+                  
+                
+              
+            
+          
+        
+        
+          Distance
+          Distance
+          Distance bin where bird was detected 
+          string
+          
+            
+              
+                
+                  
+                    1
+                    0-50 meters from observation point
+                  
+                  
+                    2
+                    50-100 meters from observation point
+                  
+                  
+                    NA
+                    No data recorded
+                  
+                
+              
+            
+          
+        
+        
+          New.Record
+          New.Record
+          Indicates whether the individual is a new record within the 10min count 
+          string
+          
+            
+              
+                
+                  
+                    0
+                    Not a new record; individual was detected in a previous period
+                  
+                  
+                    1
+                    New record; individual was not detected in a previous period
+                  
+                  
+                    NA
+                    No data recorded
+                  
+                
+              
+            
+          
+        
+        
+          Counter.sing
+          Counter.sing
+          Indicates whether individuals were counter-singing with one another 
+          string
+          
+            
+              
+                
+                  
+                    0
+                    Not counter-singing
+                  
+                  
+                    1
+                    Counter-singing; two birds detected simultaneously
+                  
+                  
+                    NA
+                    No data recorded
+                  
+                
+              
+            
+          
+        
+        
+          Comments
+          Comments
+          Comments and notes about the individual or survey 
+          string
+          
+            
+              
+                
+                  any text
+                
+              
+            
+          
+        
+      
+      247271
+    
+  
